@@ -1,0 +1,24 @@
+# ================== Bzlmod ==================
+common --enable_bzlmod
+
+# ================== C++ Settings ==================
+build --cxxopt=-std=c++17
+build --host_cxxopt=-std=c++17
+
+# ================== Cross-Compilation Configs ==================
+# Build for x86_64 Linux
+build:x86_64 --platforms=@toolchains_llvm//platforms:linux-x86_64
+
+# Build for aarch64 Linux (ARM64)
+build:aarch64 --platforms=@toolchains_llvm//platforms:linux-aarch64
+
+# ================== Hermeticity ==================
+# Prevent leaking host environment into builds
+build --incompatible_strict_action_env
+
+# ================== Performance ==================
+build --jobs=auto
+
+# ================== Error Output ==================
+# Show test errors immediately
+test --test_output=errors
