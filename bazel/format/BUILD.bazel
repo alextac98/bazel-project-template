@@ -1,0 +1,15 @@
+# Formatter configuration for Bazel
+# Run with: bazel run //:format
+
+load("@aspect_rules_lint//format:defs.bzl", "format_multirun")
+
+package(default_visibility = ["//visibility:public"])
+
+format_multirun(
+    name = "format",
+    # Uses default tools from rules_lint for each language:
+    # - C/C++: clang-format
+    # - Python: ruff format
+    # - Rust: rustfmt
+    # - Starlark: buildifier
+)

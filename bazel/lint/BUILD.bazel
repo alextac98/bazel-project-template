@@ -1,0 +1,9 @@
+# Linter tool configuration for Bazel
+# This package contains linter aspect definitions and configurations
+
+package(default_visibility = ["//visibility:public"])
+
+# Export config files so they can be referenced by linter aspects
+exports_files([
+    "linters.bzl",
+])

@@ -100,3 +100,6 @@ python.toolchain(
 )
 use_repo(python, "python_3_12")
 register_toolchains("@python_3_12//:all")
+
+# ================== Linting & Formatting ==================
+bazel_dep(name = "aspect_rules_lint", version = "1.13.0")

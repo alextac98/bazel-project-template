@@ -32,3 +32,19 @@ build --jobs=auto
 # ================== Error Output ==================
 # Show test errors immediately
 test --test_output=errors
+
+# ================== Linting ==================
+# Lint configuration (warnings only, does not fail build)
+# Usage: bazel build --config=lint //...
+build:lint --aspects=//bazel/lint:linters.bzl%clang_tidy
+build:lint --aspects=//bazel/lint:linters.bzl%ruff
+build:lint --output_groups=+rules_lint_report
+build:lint --keep_going
+
+# Lint configuration for CI (fail on any violation)
+# Usage: bazel build --config=lint-strict //...
+build:lint-strict --aspects=//bazel/lint:linters.bzl%clang_tidy
+build:lint-strict --aspects=//bazel/lint:linters.bzl%ruff
+build:lint-strict --output_groups=+rules_lint_report
+build:lint-strict --@aspect_rules_lint//lint:fail_on_violation
+build:lint-strict --keep_going

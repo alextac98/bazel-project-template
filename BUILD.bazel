@@ -1,1 +1,15 @@
 # Root BUILD file for the hermetic Bazel example repository
+
+# Export linter config files so they can be referenced by linter aspects
+exports_files([
+    ".clang-format",
+    ".clang-tidy",
+    "ruff.toml",
+    "rustfmt.toml",
+])
+
+# Alias for formatting - run with: bazel run //:format
+alias(
+    name = "format",
+    actual = "//bazel/format",
+)
